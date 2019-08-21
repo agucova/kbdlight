@@ -5,7 +5,7 @@ AC_PREREQ([2.69])
 AC_INIT([kdblight],[0.1],[https://github.com/glats/kbdlight/issues])
 AC_CONFIG_SRCDIR([src/main.c])
 AC_CONFIG_HEADERS([config.h])
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([1.11 foreign subdir-objects])
 AM_SILENT_RULES([yes])
 
 # Checks for programs.

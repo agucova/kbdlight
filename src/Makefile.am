@@ -1,5 +1,3 @@
-AM_CFLAGS = -I$(top_srcdir)/src
-
 bin_PROGRAMS = kdblight
 kdblight_SOURCES = main.c
 
