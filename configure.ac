@@ -2,13 +2,16 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([kdblight], [0.1], [juan.cuzmar.s@gmail.com])
+AC_INIT([kdblight],[0.1],[https://github.com/glats/kbdlight/issues])
 AC_CONFIG_SRCDIR([src/main.c])
 AC_CONFIG_HEADERS([config.h])
+AM_INIT_AUTOMAKE
+AM_SILENT_RULES([yes])
 
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_RANLIB
+AC_PROG_INSTALL
 
 # Use the C language and compiler for the following checks
 AC_LANG([C])
