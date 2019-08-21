@@ -7,4 +7,4 @@ endif
 bin_PROGRAMS = kdblight
 kdblight_SOURCES = main.c
 
-kdblight_LDADD = $(top_builddir)/src/lib/libdfym-base.a $(AM_LDFLAGS)
+kdblight_LDADD = $(top_builddir)/src/lib/lib-base.a $(AM_LDFLAGS)
