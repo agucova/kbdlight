@@ -31,4 +31,4 @@ stamp-h1
 *.lo
 *.gcno
 *.gcda
-src/kdblight
+kdblight
