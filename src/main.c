@@ -16,6 +16,21 @@ string_ends_with (const char *str, const char *suffix)
     return strncmp (str + lenstr - lensuffix, suffix, lensuffix) == 0;
 }
 
+void
+usage()
+{
+    printf("Usage:\n"
+           "  kdblight [OPTIONS]\n"
+           "\n"
+           "Options:\n"
+           "  -i          Increase brightness\n"
+           "  -d          Decrease brightness\n"
+           "  -c          Current brightness\n"
+           "  -h          Display help (this menu)\n"
+           "\n");
+
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -23,24 +38,56 @@ main (int argc, char *argv[])
     char *sufix_max = "max_brightness";
     char *sufix_brightness = "brightness";
     char *kernel_resources = "/sys/class/leds/";
+    int arg;
+    int inc = 0, dec = 0;
     char *kbd_backlight_name_dir = NULL;
     char *kbd_backlight_dir_path;
     char *brightness_name_file = NULL;
     char *brightness_file_path = NULL;
     char *max_brightness_name_file = NULL;
     char *max_brightness_file_path = NULL;
-    char max[BUFSIZ];
-    char level[BUFSIZ];
+    char max_level[BUFSIZ];
+    char current_level[BUFSIZ];
+    int max;
+    int level;
+    int set_level;
     struct dirent *dent;
     DIR *dir;
     FILE *max_brightness_file;
     FILE *brightness_file;
 
+    if (argc < 2)
+    {
+        usage();
+        return EXIT_FAILURE;
+    }
+
+    while ((arg = getopt(argc, argv, "idh")) != -1) {
+        switch (arg) {
+        case 'i':
+            printf ("option i\n");
+            inc = 1;
+            break;
+        case 'd':
+            printf ("option d\n");
+            dec = 1;
+            break;
+        case '?':
+        case 'h':
+        default:
+            usage();
+            return EXIT_FAILURE;
+        }
+    }
+
+    printf ("inc: %d\n", inc);
+    printf ("dec: %d\n", dec);
+
     dir = opendir (kernel_resources);
     if (dir == NULL)
     {
         printf ("Cannot open directory '%s'\n", kernel_resources);
-        return 1;
+        return EXIT_FAILURE;
     }
 
     while ((dent = readdir (dir)) != NULL)
@@ -80,9 +127,10 @@ main (int argc, char *argv[])
             max_brightness_file = fopen (max_brightness_file_path, "r");
 
             if (max_brightness_file) {
-                while (fgets (max, BUFSIZ, max_brightness_file) != NULL)
+                while (fgets (max_level, BUFSIZ, max_brightness_file) != NULL)
                 {
-                    printf ("max is: %s\n", max);
+                    printf ("max_level is: %s\n", max_level);
+                    max = atoi(max_level);
                 }
 
             }
@@ -94,16 +142,33 @@ main (int argc, char *argv[])
                 strcpy (brightness_file_path, kbd_backlight_dir_path);
                 strcat (brightness_file_path, "/");
                 strcat (brightness_file_path, brightness_name_file);
-                printf ("max_brightness_file_path: [%s]\n", brightness_file_path);
-                brightness_file = fopen (brightness_file_path, "r");
+                printf ("brightness_file_path: [%s]\n", brightness_file_path);
+                brightness_file = fopen (brightness_file_path, "w+");
 
                 if (brightness_file) {
-                    while (fgets (level, BUFSIZ, brightness_file) != NULL)
+                    while (fgets (current_level, BUFSIZ, brightness_file) != NULL)
                     {
-                        printf ("level is: %s\n", level);
+                        printf ("level is: %s\n", current_level);
+                        level = atoi(current_level);
                     }
 
                 }
+                printf ("level: %d\n", level);
+                printf ("max: %d\n", max);
+
+                if (inc) {
+                    set_level = level + 1;
+                } else {
+                    set_level = level - 1;
+                }
+
+                if (set_level >= 0 && set_level <= max) {
+                    printf ("Writting %d\n", set_level);
+                    fprintf (brightness_file, "%d", set_level);
+                }
+
+
+
                 fclose(brightness_file);
             }
         }
@@ -115,5 +180,5 @@ main (int argc, char *argv[])
     closedir (dir);
 
 
-    return 0;
+    return EXIT_SUCCESS;
 }
