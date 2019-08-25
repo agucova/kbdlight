@@ -86,6 +86,7 @@ main (int argc, char *argv[])
                 }
 
             }
+            fclose(max_brightness_file);
 
             if (brightness_name_file) {
                 printf ("brightness_name_file: [%s]\n", brightness_name_file);
@@ -103,12 +104,10 @@ main (int argc, char *argv[])
                     }
 
                 }
+                fclose(brightness_file);
             }
         }
 
-
-        fclose(brightness_file);
-        fclose(max_brightness_file);
         free (brightness_file_path);
         free (max_brightness_file_path);
         free (kbd_backlight_dir_path);
