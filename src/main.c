@@ -4,17 +4,7 @@
 #include <string.h>
 #include <memory.h>
 
-int
-string_ends_with (const char *str, const char *suffix)
-{
-    if (!str || !suffix)
-        return 0;
-    size_t lenstr = strlen (str);
-    size_t lensuffix = strlen (suffix);
-    if (lensuffix >  lenstr)
-        return 0;
-    return strncmp (str + lenstr - lensuffix, suffix, lensuffix) == 0;
-}
+#include "text.h"
 
 void
 usage()
@@ -92,7 +82,7 @@ main (int argc, char *argv[])
 
     while ((dent = readdir (dir)) != NULL)
     {
-        if (string_ends_with (dent->d_name, sufix))
+        if (text_ends_with (dent->d_name, sufix))
         {
             kbd_backlight_name_dir = dent->d_name;
         }

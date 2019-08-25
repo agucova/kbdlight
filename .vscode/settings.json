@@ -7,6 +7,9 @@
         "chrono": "c",
         "random": "c",
         "limits": "c",
-        "valarray": "c"
+        "valarray": "c",
+        "string.h": "c",
+        "stddef.h": "c",
+        "dirent.h": "c"
     },
 }
