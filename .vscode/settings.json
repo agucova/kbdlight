@@ -10,6 +10,7 @@
         "valarray": "c",
         "string.h": "c",
         "stddef.h": "c",
-        "dirent.h": "c"
+        "dirent.h": "c",
+        "stdlib.h": "c"
     },
 }

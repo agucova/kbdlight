@@ -1,5 +1,5 @@
 #include "text.h"
-#include "stddef.h"
+#include <stddef.h>
 
 int
 text_ends_with (const char *str, const char *suffix)

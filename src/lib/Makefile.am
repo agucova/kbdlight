@@ -6,9 +6,8 @@ endif
 
 
 # The libraries to build
-noinst_LIBRARIES = lib-base.a
+noinst_LIBRARIES = libbase.a
+noinst_HEADERS = dir.h file.h text.h
 
 # The files to add to the library and to the source distribution
-lib_base_a_SOURCES = \
-										     $(lib_base_a_HEADERS) \
-										     lib-base.c
+libbase_a_SOURCES = $(libbase_a_HEADERS) dir.c file.c text.c
