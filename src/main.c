@@ -5,7 +5,7 @@
 #include <memory.h>
 
 int
-ends_with (const char *str, const char *suffix)
+string_ends_with (const char *str, const char *suffix)
 {
     if (!str || !suffix)
         return 0;
@@ -45,7 +45,7 @@ main (int argc, char *argv[])
 
     while ((dent = readdir (dir)) != NULL)
     {
-        if (ends_with (dent->d_name, sufix))
+        if (string_ends_with (dent->d_name, sufix))
         {
             kbd_backlight_name_dir = dent->d_name;
         }
