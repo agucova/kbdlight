@@ -1,1 +1,0 @@
-int base_fun();
