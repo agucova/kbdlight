@@ -3,8 +3,10 @@
 #include <dirent.h>
 #include <string.h>
 #include <memory.h>
+#include <getopt.h>
 
 #include "text.h"
+#include "dir.h"
 
 void
 usage()
@@ -31,7 +33,7 @@ main (int argc, char *argv[])
     int arg;
     int inc = 0, dec = 0;
     char *kbd_backlight_name_dir = NULL;
-    char *kbd_backlight_dir_path;
+    char *kbd_backlight_dir_path;    
     char *brightness_name_file = NULL;
     char *brightness_file_path = NULL;
     char *max_brightness_name_file = NULL;
@@ -72,28 +74,14 @@ main (int argc, char *argv[])
 
     printf ("inc: %d\n", inc);
     printf ("dec: %d\n", dec);
-
-    dir = opendir (kernel_resources);
-    if (dir == NULL)
-    {
-        printf ("Cannot open directory '%s'\n", kernel_resources);
-        return EXIT_FAILURE;
-    }
-
-    while ((dent = readdir (dir)) != NULL)
-    {
-        if (text_ends_with (dent->d_name, sufix))
-        {
-            kbd_backlight_name_dir = dent->d_name;
-        }
-    }
-
+    kbd_backlight_name_dir = retrieve_kbdb_dir(kernel_resources);
     if (kbd_backlight_name_dir)
     {
         kbd_backlight_dir_path = (char *) malloc (1 + strlen (kernel_resources) + strlen (kbd_backlight_name_dir));
         strcpy (kbd_backlight_dir_path, kernel_resources);
         strcat (kbd_backlight_dir_path, kbd_backlight_name_dir);
         printf ("kbd_backlight_dir_path: [%s]\n", kbd_backlight_dir_path);
+        
         dir = opendir (kbd_backlight_dir_path);
         while ((dent = readdir (dir)) != NULL)
         {
