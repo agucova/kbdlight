@@ -26,9 +26,6 @@ usage()
 int
 main (int argc, char *argv[])
 {
-    char *sufix = "backlight";
-    char *sufix_max = "max_brightness";
-    char *sufix_brightness = "brightness";
     char *kernel_resources = "/home/jcuzmar/Projects/other/misc/kbdlight/fake/";
     int arg;
     int inc = 0, dec = 0;
@@ -43,8 +40,6 @@ main (int argc, char *argv[])
     int max;
     int level;
     int set_level;
-    struct dirent *dent;
-    DIR *dir;
     FILE *max_brightness_file;
     FILE *brightness_file;
 
@@ -78,51 +73,36 @@ main (int argc, char *argv[])
     if (kbd_backlight_name_dir)
     {
         kbd_backlight_dir_path = (char *) malloc (1 + strlen (kernel_resources) + strlen (kbd_backlight_name_dir));
-        strcpy (kbd_backlight_dir_path, kernel_resources);
-        strcat (kbd_backlight_dir_path, kbd_backlight_name_dir);
+        sprintf(kbd_backlight_dir_path, "%s%s", kernel_resources, kbd_backlight_name_dir);
         printf ("kbd_backlight_dir_path: [%s]\n", kbd_backlight_dir_path);
-        
-        dir = opendir (kbd_backlight_dir_path);
-        while ((dent = readdir (dir)) != NULL)
-        {
-            if (strcmp(dent->d_name, sufix_max) == 0)
-            {
-                max_brightness_name_file = dent->d_name;
 
-            }
-            if (strcmp(dent->d_name, sufix_brightness) == 0)
-            {
-                brightness_name_file = dent->d_name;
+        max_brightness_name_file = max_brightness_dir_file(kbd_backlight_dir_path);
+        brightness_name_file = brightness_dir_file(kbd_backlight_dir_path);
 
-            }
-        }
         if (max_brightness_name_file) {
             max_brightness_file_path = (char *) malloc (1 + strlen (kbd_backlight_dir_path) + strlen (max_brightness_name_file));
-            strcpy (max_brightness_file_path, kbd_backlight_dir_path);
-            strcat (max_brightness_file_path, "/");
-            strcat (max_brightness_file_path, max_brightness_name_file);
+            sprintf(max_brightness_file_path, "%s/%s", kbd_backlight_dir_path, max_brightness_name_file);
             printf ("max_brightness_file_path: [%s]\n", max_brightness_file_path);
             max_brightness_file = fopen (max_brightness_file_path, "r");
 
             if (max_brightness_file) {
                 while (fgets (max_level, BUFSIZ, max_brightness_file) != NULL)
                 {
-                    printf ("max_level is: %s\n", max_level);
+                    printf ("max_level is: %s", max_level);
                     max = atoi(max_level);
                 }
 
             }
+            printf ("freeing max_brightness_file_path\n");
+            free (max_brightness_file_path);
             fclose(max_brightness_file);
 
             if (brightness_name_file) {
                 printf ("brightness_name_file: [%s]\n", brightness_name_file);
                 brightness_file_path = (char *) malloc (1 + strlen (kbd_backlight_dir_path) + strlen (brightness_name_file));
-                strcpy (brightness_file_path, kbd_backlight_dir_path);
-                strcat (brightness_file_path, "/");
-                strcat (brightness_file_path, brightness_name_file);
+                sprintf(brightness_file_path, "%s/%s", kbd_backlight_dir_path, brightness_name_file);
                 printf ("brightness_file_path: [%s]\n", brightness_file_path);
-                brightness_file = fopen (brightness_file_path, "w+");
-
+                brightness_file = fopen (brightness_file_path, "r");
                 if (brightness_file) {
                     while (fgets (current_level, BUFSIZ, brightness_file) != NULL)
                     {
@@ -131,30 +111,25 @@ main (int argc, char *argv[])
                     }
 
                 }
+                fclose(brightness_file);
+
                 printf ("level: %d\n", level);
                 printf ("max: %d\n", max);
 
-                if (inc) {
-                    set_level = level + 1;
-                } else {
-                    set_level = level - 1;
-                }
+                set_level = inc ? level + 1 : level - 1;
 
                 if (set_level >= 0 && set_level <= max) {
-                    printf ("Writting %d\n", set_level);
-                    fprintf (brightness_file, "%d", set_level);
+                    printf ("Writting: %d\n", set_level);
+                    brightness_file = fopen(brightness_file_path, "w");
+                    if (brightness_file) {
+                        fprintf (brightness_file, "%d", set_level);
+                    }
+                    fclose(brightness_file);
                 }
-
-
-
-                fclose(brightness_file);
             }
+            free (kbd_backlight_dir_path);
         }
-
         free (brightness_file_path);
-        free (max_brightness_file_path);
-        free (kbd_backlight_dir_path);
-        closedir (dir);
     }
 
     return EXIT_SUCCESS;

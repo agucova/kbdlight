@@ -1,7 +1,4 @@
 {
-    "[c]": {
-        "editor.defaultFormatter": "chiehyu.vscode-astyle"
-    },
     "files.associations": {
         "string_view": "c",
         "chrono": "c",
