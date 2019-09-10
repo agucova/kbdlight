@@ -29,7 +29,7 @@ main (int argc, char *argv[])
     char *sufix = "backlight";
     char *sufix_max = "max_brightness";
     char *sufix_brightness = "brightness";
-    char *kernel_resources = "/sys/class/leds/";
+    char *kernel_resources = "/home/jcuzmar/Projects/other/misc/kbdlight/fake/";
     int arg;
     int inc = 0, dec = 0;
     char *kbd_backlight_name_dir = NULL;
