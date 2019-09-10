@@ -154,9 +154,8 @@ main (int argc, char *argv[])
         free (brightness_file_path);
         free (max_brightness_file_path);
         free (kbd_backlight_dir_path);
+        closedir (dir);
     }
-    closedir (dir);
-
 
     return EXIT_SUCCESS;
 }

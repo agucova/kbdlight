@@ -7,7 +7,7 @@ char
 *retrieve_kbdb_dir(char *path)
 {
     char *sufix = "backlight";
-    char *name_dir;
+    char *name_dir = NULL;
     struct dirent *dent;
     DIR *dir;
     dir = opendir (path);
