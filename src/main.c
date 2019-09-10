@@ -26,7 +26,7 @@ usage()
 int
 main (int argc, char *argv[])
 {
-    char *kernel_resources = "/home/jcuzmar/Projects/other/misc/kbdlight/fake/";
+    char *kernel_resources = "/sys/class/leds/";
     int arg;
     int inc = 0, dec = 0;
     char *kbd_backlight_name_dir = NULL;
