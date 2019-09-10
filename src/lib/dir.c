@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <string.h>
-
+#include "dir.h"
 #include "text.h"
 
 char 
@@ -15,7 +15,6 @@ char
     dir = opendir (path);
     if (dir == NULL)
     {
-        printf ("Cannot open directory '%s'\n", path);
         return NULL;
     }
     while ((dent = readdir (dir)) != NULL)
@@ -62,4 +61,41 @@ char
     }
     closedir (dir);
     return brightness_file;
+}
+
+int
+max_brightness_value(char *path)
+{
+    FILE *max_brightness_file = fopen (path, "r");
+    char max_level[BUFSIZ];
+    int max = 0;
+
+    if (max_brightness_file) {
+        while (fgets (max_level, BUFSIZ, max_brightness_file) != NULL)
+        {
+            printf ("max_level is: %s", max_level);
+            max = atoi(max_level);
+        }
+
+    }
+    fclose(max_brightness_file);
+    return max;
+}
+
+int
+level_brightness_value(char *path)
+{
+    FILE *brightness_file = fopen (path, "r");
+    char current_level[BUFSIZ];
+    int level = 0;
+    if (brightness_file) {
+        while (fgets (current_level, BUFSIZ, brightness_file) != NULL)
+        {
+            printf ("level is: %s\n", current_level);
+            level = atoi(current_level);
+        }
+
+    }
+    fclose(brightness_file);
+    return level;
 }
