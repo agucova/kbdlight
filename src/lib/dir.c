@@ -29,7 +29,12 @@ char
         }
     }
     closedir(dir);
-    return kbd_backlight_concat_path(kernel_resources, name_dir);
+
+    if (!name_dir) {
+        return NULL;
+    }
+    
+    return concat_path(kernel_resources, name_dir);
 }
 
 char
@@ -44,7 +49,7 @@ char
             max_brightness_file = dent->d_name;
     }
     closedir (dir);
-    return kbd_backlight_concat_path(path, max_brightness_file);
+    return concat_path(path, max_brightness_file);
 }
 
 char
@@ -59,5 +64,5 @@ char
             brightness_file = dent->d_name;
     }
     closedir (dir);
-    return kbd_backlight_concat_path(path, brightness_file);
+    return concat_path(path, brightness_file);
 }

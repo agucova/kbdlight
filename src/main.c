@@ -27,6 +27,7 @@ usage()
 int
 main (int argc, char *argv[])
 {
+    printf ("Error");
     int arg;
     int inc = 0, cur = 0;
     char *kernel_resources_dir = NULL;
@@ -60,7 +61,8 @@ main (int argc, char *argv[])
         }
     }
 
-    kernel_resources_dir = get_kernel_resources();   
+    kernel_resources_dir = get_kernel_resources();
+    
     if (!kernel_resources_dir)
     {
         printf ("Error: your kernel doesn't support beyboard backlight/brightness\n");
