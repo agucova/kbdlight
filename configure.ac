@@ -1,4 +1,4 @@
-AC_INIT([kdblight],[1.2],[https://github.com/glats/kbdlight/issues])
+AC_INIT([kbdlight],[1.2],[https://github.com/glats/kbdlight/issues])
 AM_INIT_AUTOMAKE([1.11 foreign subdir-objects])
 AM_SILENT_RULES([yes])
 

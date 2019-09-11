@@ -13,7 +13,7 @@ void
 usage()
 {
     printf("Usage:\n"
-           "  kdblight [OPTIONS]\n"
+           "  kbdlight [OPTIONS]\n"
            "\n"
            "Options:\n"
            "  -i          Increase brightness\n"

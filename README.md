@@ -15,8 +15,8 @@ Follows this steps:
  ./autogen.sh
  ./configure
  make
- sudo ./src/kdblight -i
- sudo ./src/kdblight -d
+ sudo ./src/kbdlight -i
+ sudo ./src/kbdlight -d
  ```
 
  ## Binding shortcut

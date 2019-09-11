@@ -4,7 +4,7 @@ else
   AM_CFLAGS =-I$(top_srcdir)/src/bin -I$(top_srcdir)/src/lib -Wall -O3
 endif
 
-bin_PROGRAMS = kdblight
-kdblight_SOURCES = main.c
+bin_PROGRAMS = kbdlight
+kbdlight_SOURCES = main.c
 
-kdblight_LDADD = $(top_builddir)/src/lib/libbase.a $(AM_LDFLAGS)
+kbdlight_LDADD = $(top_builddir)/src/lib/libbase.a $(AM_LDFLAGS)
