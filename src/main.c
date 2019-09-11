@@ -27,7 +27,6 @@ usage()
 int
 main (int argc, char *argv[])
 {
-    printf ("Error");
     int arg;
     int inc = 0, cur = 0;
     char *kernel_resources_dir = NULL;
