@@ -1,13 +1,12 @@
-#                                               -*- Autoconf -*-
-# Process this file with autoconf to produce a configure script.
-
-AC_PREREQ([2.69])
 AC_INIT([kdblight],[1.2],[https://github.com/glats/kbdlight/issues])
-AC_PREFIX_DEFAULT([/usr])
-AC_CONFIG_SRCDIR([src/main.c])
-AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([1.11 foreign subdir-objects])
 AM_SILENT_RULES([yes])
+
+AC_CONFIG_SRCDIR([src/main.c])
+AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_FILES([Makefile
+                 src/lib/Makefile
+                 src/Makefile])
 
 # Checks for programs.
 AC_PROG_CC
@@ -27,10 +26,6 @@ AC_CHECK_HEADERS([stdio.h])
 AC_TYPE_SIZE_T
 
 # Checks for library functions.
-
-AC_CONFIG_FILES([Makefile
-                 src/lib/Makefile
-                 src/Makefile])
 
 # Add debug support
 AC_ARG_ENABLE(debug,
