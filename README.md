@@ -19,6 +19,11 @@ Follows this steps:
  sudo ./src/kdblight -d
  ```
 
+ ## Binding shortcut
+ You can binding the binary with this shorctus:  
+```XF86KbdBrightnessUp``` to run ```kbdlight -i```  
+```XF86KbdBrightnessDown``` to run ```kbdlight -d```
+
 ## Notes
 I wrote this because I don't wanna use a program with a lot of dependencies to do a simple task like control the brightness. 
 This idea started finding minimal programs for my workstation at home. In this research I found [light](https://github.com/haikarainen/light) 

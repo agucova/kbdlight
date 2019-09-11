@@ -9,6 +9,10 @@ kbdlight - management keyboard brightness under GNU/Linux.
 .SH DESCRIPTION
 .B kbdlight
 provides a simple solution without extra dependencies to control the light in your keyboard
+.br
+The program reads the file provided by linux kernel in /sys/class/leds.
+.br
+It makes the basic control: increase and decrease the brightness one by one. This depends of the value in max_brightness file
 .SH OPTIONS
 .TP
 .B -i
