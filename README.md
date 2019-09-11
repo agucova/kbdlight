@@ -1,22 +1,28 @@
 # kbdlight
 
-## About
+# About
 This program allows the user to change the keyboard brightness in GNU/Linux. It hasn't any extra dependecy such programs like [upower](https://upower.freedesktop.org/) (that allow to control the brightness but contains a lot other libs that sometimes you dont need).
 The program adapt unix's philosophy.
 
-## How it works
+# How it works
 The program reads the file provided by the [kernel](https://www.kernel.org/) in ```/sys/class/leds```  
 It makes the basic control: increase and decrease the brightness one by one. This depends of the value in ```max_brightness``` file
 
-## Try it
-Follows this steps:
+# Installation
+## Prepare user
+Adding user to group video
+```
+sudo usermod -aG video $USER
+```
+logout of your session and login again
+
+## Compiling and installing 
 
  ```
  ./autogen.sh
  ./configure
  make
- sudo ./src/kbdlight -i
- sudo ./src/kbdlight -d
+ sudo make install
  ```
 
  ## Binding shortcut
@@ -24,7 +30,7 @@ Follows this steps:
 ```XF86KbdBrightnessUp``` to run ```kbdlight -i```  
 ```XF86KbdBrightnessDown``` to run ```kbdlight -d```
 
-## Notes
+# Notes
 I wrote this because I don't wanna use a program with a lot of dependencies to do a simple task like control the brightness. 
 This idea started finding minimal programs for my workstation at home. In this research I found [light](https://github.com/haikarainen/light) 
 a simple program that allows you to control the display brightness without extra libraries that you will never use. With this I tried to find 
