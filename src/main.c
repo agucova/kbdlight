@@ -65,7 +65,7 @@ main (int argc, char *argv[])
     
     if (!kernel_resources_dir)
     {
-        printf ("Error: your kernel doesn't support beyboard backlight/brightness\n");
+        printf (" your kernel doesn't support beyboard backlight/brightness\n");
         return EXIT_FAILURE;
     }
     
@@ -73,7 +73,7 @@ main (int argc, char *argv[])
 
     if (!brightness_file)
     {
-        printf ("Error: \"brightness\" file doesn't exists in: %s\n", kernel_resources_dir);
+        printf (" \"brightness\" file doesn't exists in: %s\n", kernel_resources_dir);
         return EXIT_FAILURE;
     }
     
@@ -89,7 +89,7 @@ main (int argc, char *argv[])
 
     if (!max_brightness_file)
     {
-        printf ("Error: \"max_brightness\" file doesn't exists in: %s\n", kernel_resources_dir);
+        printf (" \"max_brightness\" file doesn't exists in: %s\n", kernel_resources_dir);
         return EXIT_FAILURE;
     }
     free (kernel_resources_dir);
