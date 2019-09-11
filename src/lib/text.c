@@ -16,11 +16,9 @@ text_ends_with (const char *str, const char *suffix)
 }
 
 char
-*concatenate_path(char *resources, char *path)
+*kbd_backlight_concat_path(char *resources, char *path)
 {
-        char *kbd_backlight_dir_path = (char *) malloc (1 + strlen (resources) + strlen (path));
-        strcpy (kbd_backlight_dir_path, resources);
-        strcat (kbd_backlight_dir_path, path);
-        printf ("kbd_backlight_dir_path: [%s]\n", kbd_backlight_dir_path);
-        return kbd_backlight_dir_path;
+    char *kbd_backlight_dir_path = (char *) malloc (1 + strlen (resources) + strlen (path));
+    sprintf(kbd_backlight_dir_path, "%s/%s", resources, path);
+    return kbd_backlight_dir_path;
 }

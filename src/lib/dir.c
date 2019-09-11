@@ -5,97 +5,59 @@
 #include "dir.h"
 #include "text.h"
 
+const char* SUFIX = "backlight";
+const char* MAX_BRIGHTNESS = "max_brightness";
+const char* BRIGHTNESS = "brightness";
+
 char 
-*retrieve_kbdb_dir(char *path)
+*get_kernel_resources()
 {
-    char *sufix = "backlight";
+    char* kernel_resources = "/sys/class/leds";
     char *name_dir = NULL;
     struct dirent *dent;
-    DIR *dir;
-    dir = opendir (path);
+    DIR *dir = opendir (kernel_resources);
     if (dir == NULL)
     {
         return NULL;
     }
     while ((dent = readdir (dir)) != NULL)
     {
-        if (text_ends_with (dent->d_name, sufix))
+        if (text_ends_with (dent->d_name, SUFIX))
         {
             name_dir = dent->d_name;
-    
+            break;
         }
     }
     closedir(dir);
-    return name_dir;
+    return kbd_backlight_concat_path(kernel_resources, name_dir);
 }
 
 char
-*max_brightness_dir_file(char *path)
+*get_max_brightness(char *path)
 {
     char *max_brightness_file = NULL;
-    char *sufix_max = "max_brightness";
     struct dirent *dent;
-    DIR *dir;
-    dir = opendir (path);
+    DIR *dir = opendir (path);
     while ((dent = readdir (dir)) != NULL)
     {
-        if (strcmp(dent->d_name, sufix_max) == 0)
+        if (strcmp(dent->d_name, MAX_BRIGHTNESS) == 0)
             max_brightness_file = dent->d_name;
     }
     closedir (dir);
-    return max_brightness_file;
+    return kbd_backlight_concat_path(path, max_brightness_file);
 }
 
 char
-*brightness_dir_file(char *path)
+*get_brightness(char *path)
 {
     char *brightness_file = NULL;
-    char *sufix_brightness = "brightness";
     struct dirent *dent;
-    DIR *dir;
-    dir = opendir (path);
+    DIR *dir = opendir (path);
     while ((dent = readdir (dir)) != NULL)
     {
-        if (strcmp(dent->d_name, sufix_brightness) == 0)
+        if (strcmp(dent->d_name, BRIGHTNESS) == 0)
             brightness_file = dent->d_name;
     }
     closedir (dir);
-    return brightness_file;
-}
-
-int
-max_brightness_value(char *path)
-{
-    FILE *max_brightness_file = fopen (path, "r");
-    char max_level[BUFSIZ];
-    int max = 0;
-
-    if (max_brightness_file) {
-        while (fgets (max_level, BUFSIZ, max_brightness_file) != NULL)
-        {
-            printf ("max_level is: %s", max_level);
-            max = atoi(max_level);
-        }
-
-    }
-    fclose(max_brightness_file);
-    return max;
-}
-
-int
-level_brightness_value(char *path)
-{
-    FILE *brightness_file = fopen (path, "r");
-    char current_level[BUFSIZ];
-    int level = 0;
-    if (brightness_file) {
-        while (fgets (current_level, BUFSIZ, brightness_file) != NULL)
-        {
-            printf ("level is: %s\n", current_level);
-            level = atoi(current_level);
-        }
-
-    }
-    fclose(brightness_file);
-    return level;
+    return kbd_backlight_concat_path(path, brightness_file);
 }

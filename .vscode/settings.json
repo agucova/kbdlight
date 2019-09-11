@@ -11,6 +11,7 @@
         "stdlib.h": "c",
         "memory.h": "c",
         "text.h": "c",
-        "dir.h": "c"
+        "dir.h": "c",
+        "file.h": "c"
     },
 }
