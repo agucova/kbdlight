@@ -28,7 +28,7 @@ int
 main (int argc, char *argv[])
 {
     int arg;
-    int inc = 0;
+    int inc = 0, cur = 0;
     char *kernel_resources_dir = NULL;
     char *brightness_file = NULL;
     char *max_brightness_file = NULL;
@@ -42,12 +42,15 @@ main (int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    while ((arg = getopt(argc, argv, "idh")) != -1) {
+    while ((arg = getopt(argc, argv, "idch")) != -1) {
         switch (arg) {
         case 'i':
             inc = 1;
             break;
         case 'd':
+            break;
+        case 'c':
+            cur = 1;
             break;
         case '?':
         case 'h':
@@ -64,17 +67,6 @@ main (int argc, char *argv[])
         return EXIT_FAILURE;
     }
     
-    max_brightness_file = get_max_brightness(kernel_resources_dir);
-
-    if (!max_brightness_file)
-    {
-        printf ("Error: \"max_brightness\" file doesn't exists in: %s\n", kernel_resources_dir);
-        return EXIT_FAILURE;
-    }
-
-    max_brightness = read_max_brightness(max_brightness_file);
-    free (max_brightness_file);
-
     brightness_file = get_brightness(kernel_resources_dir);
 
     if (!brightness_file)
@@ -82,8 +74,25 @@ main (int argc, char *argv[])
         printf ("Error: \"brightness\" file doesn't exists in: %s\n", kernel_resources_dir);
         return EXIT_FAILURE;
     }
-    free (kernel_resources_dir);
+    
     current_level = read_curent_level(brightness_file);
+
+    if (cur)
+    {
+        printf ("%d\n", current_level);
+        return EXIT_SUCCESS;
+    }
+
+    max_brightness_file = get_max_brightness(kernel_resources_dir);
+
+    if (!max_brightness_file)
+    {
+        printf ("Error: \"max_brightness\" file doesn't exists in: %s\n", kernel_resources_dir);
+        return EXIT_FAILURE;
+    }
+    free (kernel_resources_dir);
+    max_brightness = read_max_brightness(max_brightness_file);
+    free (max_brightness_file);
 
     level = inc ? current_level + 1 : current_level - 1;
 
