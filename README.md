@@ -16,9 +16,11 @@ sudo usermod -aG video $USER
 ```
 logout of your session and login again
 
-## Compiling and installing 
+## Compiling
 
  ```
+ git clone https://github.com/glats/kbdlight.git
+ cd kbdlight
  ./autogen.sh
  ./configure
  make
