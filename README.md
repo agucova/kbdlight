@@ -9,6 +9,7 @@ The program reads the file provided by the [kernel](https://www.kernel.org/) in 
 It makes the basic control: increase and decrease the brightness one by one. This depends of the value in ```max_brightness``` file
 
 # Installation
+
 ## Prepare user
 Adding user to group video
 ```
@@ -16,7 +17,10 @@ sudo usermod -aG video $USER
 ```
 logout of your session and login again
 
-## Compiling
+## Distros
+You can install the AUR package [kbdlight-git](https://aur.archlinux.org/packages/kbdlight-git/)
+
+## Manually
 
  ```
  git clone https://github.com/glats/kbdlight.git
