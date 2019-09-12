@@ -37,4 +37,4 @@ I wrote this because I don't wanna use a program with a lot of dependencies to d
 This idea started finding minimal programs for my workstation at home. In this research I found [light](https://github.com/haikarainen/light) 
 a simple program that allows you to control the display brightness without extra libraries that you will never use. With this I tried to find 
 something similar for the keyboard without success. So I started to learn C I write my own program for this task.
-This is my first project in C so please be nice!I'm wide open to receive improvements and receive good reviews for 
+This is my first project in C so please be nice! I'm wide open to receive improvements and receive good reviews for 
