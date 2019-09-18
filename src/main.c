@@ -93,6 +93,12 @@ main (int argc, char *argv[])
     }
     free (kernel_resources_dir);
     max_brightness = read_max_brightness(max_brightness_file);
+
+    if(!max_brightness) {
+        printf (" trying to get the value from (garbage values): %s\n", max_brightness_file);
+        return EXIT_FAILURE;
+    }
+
     free (max_brightness_file);
 
     level = inc ? current_level + 1 : current_level - 1;

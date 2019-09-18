@@ -15,9 +15,8 @@ read_max_brightness(char *path)
     if (max_brightness_file) {
         while (fgets (max_level, BUFSIZ, max_brightness_file) != NULL)
         {
-            max = atoi(max_level);
+            max = (int)strtol(max_level, (char **)NULL, 10);
         }
-
     }
     fclose(max_brightness_file);
     return max;
