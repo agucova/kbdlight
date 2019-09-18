@@ -1,3 +1,10 @@
+<a name="1.4"></a>
+# [Replacing atoi (1.4)](https://github.com/glats/kbdlight/releases/tag/1.4) - 18 Sep 2019
+
+[Changes][1.4]
+
+I replaced atoi to use strol instead
+
 <a name="1.3"></a>
 # [Preparing for AUR (1.3)](https://github.com/glats/kbdlight/releases/tag/1.3) - 11 Sep 2019
 
