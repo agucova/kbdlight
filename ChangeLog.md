@@ -50,6 +50,7 @@ Any other thins please let me know.
 
 This is my first program in C. Please be nice!
 
+[1.4]: https://github.com/glats/kbdlight/compare/1.3...1.4
 [1.3]: https://github.com/glats/kbdlight/compare/1.2...1.3
 [1.2]: https://github.com/glats/kbdlight/compare/1.1...1.2
 [1.1]: https://github.com/glats/kbdlight/compare/1.0...1.1
