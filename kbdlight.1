@@ -1,38 +1,38 @@
 \" manpage for kbdlight
 .\" Contact juan.cuzmar.s@gmail.com to correct errors or typos
-.TH kbdlight 1 "09 September 2019" "version 1" "kbdlight manpage"
+.TH kbdlight 1 "21 September 2019" "version 1.1" "kbdlight manpage"
 .SH NAME
-kbdlight - management keyboard brightness under GNU/Linux.
+kbdlight - change keyboard backlight brightness
 .SH SYNOPSIS
 .B kbdlight
 .RI "[" OPTION "]"
 .SH DESCRIPTION
 .B kbdlight
-provides a simple solution without extra dependencies to control the light in your keyboard
+allows the user to change the brightness of a backlit keyboard using /sys/class/leds.
 .br
-The program reads the file provided by linux kernel in /sys/class/leds.
+The program works in userspace by changing the value in the brightness file provided by the kernel in /sys/class/leds/.
 .br
-It makes the basic control: increase and decrease the brightness one by one. This depends of the value in max_brightness file
+For this to work, the kernel must support this type of control, the user must have appropiate permissions (in most distros, the video group is sufficient) and the hardware must expose the backlight to the kernel.
 .SH OPTIONS
 .TP
 .B -i
-Increase brightness one by one
+Increase brightness by one
 .TP
 .B -d
-Decrease brightness one by one
+Decrease brightness by one
 .TP
 .B -c
 Get current brightness value
 .TP
 .B -h
-Prints program usage information and exits successfully.
+Prints usage.
 .SH EXIT STATUS
 .TP
 0
 Success.
 .TP
 1
-With any error.
+Error.
 .SH AUTHOR
 Juan Cuzmar (juan.cuzmar.s@gmail.com)
 .SH "REPORTING BUGS"
