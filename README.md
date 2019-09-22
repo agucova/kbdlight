@@ -31,6 +31,17 @@ You can build the program by yourself using make:
  sudo make install # Install to the appropiate path.
  ```
 
+# Usage
+```
+kbdlight [OPTIONS]
+
+Options:
+  -i          Increase keyboard brightness (by one)
+  -d          Decrease keyboard brightness (by one)
+  -c          Display current brightness
+  -h          Display help.
+```
+
 ## Hotkey
 You can bind standard keys to increase/decrease the keyboard brightness by binding `XF86KbdBrightnessUp` to `kbdlight -i` and `XF86KbdBrightnessDown` to `kbdlight -d`.
 
