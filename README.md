@@ -1,40 +1,40 @@
-# kbdlight
-
+# kbdlight 💡
 # About
-This program allows the user to change the keyboard brightness in GNU/Linux. It hasn't any extra dependency such as [upower](https://upower.freedesktop.org/) (that allow to control the brightness, but contains a lot other libs that sometimes you dont need).
-In a few words this program adapt unix's philosophy.
+This command-line utility allows the user to change the brightness of a backlit keyboard in GNU/Linux.
+
+The main advantage over alternatives like [upower](https://upower.freedesktop.org/) is the lack of unnecessary dependencies and libraries, as well as simplicity of operation. (full of UNIX goodness!)
 
 # How it works
-The program reads the file provided by the [kernel](https://www.kernel.org/) in ```/sys/class/leds```  
-It makes the basic control: increase and decrease the brightness one by one. This depends of the value in ```max_brightness``` file
+The program works in userspace by changing the value in the `brightness` file provided by the [kernel](https://www.kernel.org/) in `/sys/class/leds` (see [here](https://www.kernel.org/doc/Documentation/leds/leds-class.txt) for details).
+
+For this to work, the kernel must support this type of control, the user must have appropiate permissions (in most distros, the `video` group is sufficient) and the hardware must expose the backlight to the kernel.
 
 # Installation
-
-## Prepare user
-Adding user to group video
+## User Permissions
+Add user to the `video` group:
 ```
 sudo usermod -aG video $USER
 ```
-logout of your session and login again
+Then log out and back in for the permissions to refresh.
+## Packages
+If you are using Arch Linux, you can install the AUR package for automatic installation [here](https://aur.archlinux.org/packages/kbdlight-git/).
+If you are instead using another distro, you'll need to build and compile the program yourself, check the next section for this.
 
-## Distros
-You can install the AUR package [kbdlight-git](https://aur.archlinux.org/packages/kbdlight-git/)
-
-## Manually
-
+## Manual
+You can build the program by yourself using make:
  ```
  git clone https://github.com/glats/kbdlight.git
  cd kbdlight
  ./autogen.sh
  ./configure
  make
- sudo make install
+ sudo make install # Install to the appropiate path.
  ```
 
- ## Binding shortcut
- You can binding the binary with this shorctus:  
-```XF86KbdBrightnessUp``` to run ```kbdlight -i```  
-```XF86KbdBrightnessDown``` to run ```kbdlight -d```
+## Hotkey
+You can bind standard keys to increase/decrease the keyboard brightness by binding `XF86KbdBrightnessUp` to `kbdlight -i` and `XF86KbdBrightnessDown` to `kbdlight -d`.
 
 # Notes
-I wrote this because I don't wanna use a program with a lot of dependencies to do a simple task like control the brightness. This idea started trying to find a minimalist program for my workstation at home. In this research I found [light](https://github.com/haikarainen/light): a simple program that allows you to control the display brightness without extra libraries. With this I tried to find something similar for the keyboard without success. So I started to learn C I write my own program for this job. This is my first project in C so please be nice! I'm wide open to receive improvements and receive good reviews for.
+I wrote this because I didn't wanna use a program with a lot of dependencies to do such a simple task like control the brightness. This idea started while trying to find a minimalist program for my workstation at home, in this research I found [light](https://github.com/haikarainen/light), a simple program that allows you to control the display brightness without extra libraries. Inspired by this I tried to find something similar for keyboard backlights without success, so I decided to start learning C while writing this program. 
+
+This is my first project in C so please be nice! Feel free to start an issue or a pull request.
