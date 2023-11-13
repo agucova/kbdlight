@@ -1,3 +1,5 @@
+> **Note:** This is an abandoned fork of `kbdlight`, a now-extinct utility. The code is not mine.
+
 # kbdlight 💡
 # About
 This command-line utility allows the user to change the brightness of a backlit keyboard in GNU/Linux.
